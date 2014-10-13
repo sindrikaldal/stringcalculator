@@ -36,7 +36,7 @@ public class CalculatorTest {
 
     @Test
     public void testInputWithGivenDelimiter(){
-    	assertEquals(10, Calculator.add("//;\n1;2"));
+    	assertEquals(3, Calculator.add("//;\n1;2"));
     }
 
 }

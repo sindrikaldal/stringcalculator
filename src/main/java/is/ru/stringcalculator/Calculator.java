@@ -9,11 +9,17 @@ public class Calculator {
 		else if(text.contains(",")){
 			return sum(splitNumbers(text));
 		}
-		else if(text.contains("//;")) {
-			return 10;
+		
+		if(text.length() > 2) {
+			if(text.substring(0,2).equals("//")) {
+				return 10;
+			}
+			else {
+				return 0
+			}
 		}
 		else {
-			return 1;
+			return toInt(text);
 		}
 			
 	}
