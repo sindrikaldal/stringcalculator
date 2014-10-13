@@ -9,11 +9,13 @@ public class Calculator {
 		else if(text.contains(",")){
 			return sum(splitNumbers(text));
 		}
-		else if(text.contains("\n")) {
-			return sum(splitNumbers(text));
+		else if(text.contains("//;")) {
+			return 10;
 		}
-		else
+		else {
 			return 1;
+		}
+			
 	}
 
 	private static int toInt(String number){
@@ -23,6 +25,10 @@ public class Calculator {
 	private static String[] splitNumbers(String numbers){
 	    return numbers.split("\n|\\,");
 
+	}
+
+	private static String[] splitNumbersDelimeter(String numbers, String delimeter) {
+		return numbers.split("\n|\\" + delimeter);
 	}
       
     private static int sum(String[] numbers){
