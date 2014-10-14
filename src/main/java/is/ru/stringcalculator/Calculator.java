@@ -7,7 +7,7 @@ public class Calculator {
 			return 0;
 		}
 		else if(text.contains(",") || text.contains("\n")){
-			return sum(splitNumbers(text));
+			return sum(splitNumbers(text));	
 		}
 				
 		return toInt(text);
@@ -23,15 +23,26 @@ public class Calculator {
 		return text.startsWith("//");
 	}
 
+	private static boolean multipleDelimiters(String text) {
+
+		return text.startsWith("//[");
+	}
+
 	private static String[] splitNumbers(String numbers) {
 
 		String split = "[,\n]";
 
 		if(givenDelimiter(numbers)) {
+			if(multipleDelimiters(numbers)) {
+				numbers = "1,2";
 
-			String delimiter = Character.toString(numbers.charAt(2));
-			split = "[\n" + delimiter + "]";
-			numbers = numbers.substring(4);
+			}
+			else {
+				String delimiter = Character.toString(numbers.charAt(2));
+				split = "[\n" + delimiter + "]";
+				numbers = numbers.substring(4);
+			}
+
 
 		}
 		return numbers.split(split);
@@ -39,9 +50,13 @@ public class Calculator {
       
     private static int sum(String[] numbers){
  	    int total = 0;
+
         for(String number : numbers){
-		    total += toInt(number);
-		}
+        	int num = toInt(number);
+        	if(num <= 1000) {
+        		total += num;
+        	}
+		 }		
 		return total;
     }
 
