@@ -1,4 +1,6 @@
 package is.ru.stringcalculator;
+import java.util.ArrayList;
+
 
 public class Calculator {
 
@@ -34,11 +36,16 @@ public class Calculator {
 
 		if(givenDelimiter(numbers)) {
 			if(multipleDelimiters(numbers)) {
-				String delimiter1 = Character.toString(numbers.charAt(3));
-				String delimiter2 = Character.toString(numbers.charAt(6));
-				split = "[\n" + delimiter1 + delimiter2 + "]";
-				numbers = numbers.substring(9);
+				ArrayList<String> delimiters = getDelimiters(numbers);
+				split = "[\n";
+				for(int i = 0; i < delimiters.size() ; i++) {
+					split += delimiters.get(i);
+				}
 
+				split += "]";
+				int index = numbers.indexOf("\n") + 1;
+
+				numbers = numbers.substring(index);
 			}
 			else {
 				String delimiter = Character.toString(numbers.charAt(2));
@@ -48,7 +55,23 @@ public class Calculator {
 
 
 		}
+		
 		return numbers.split(split);
+	}
+
+	private static ArrayList<String> getDelimiters(String numbers) {
+
+		ArrayList<String> list = new ArrayList<String>();
+
+		int indexof = 0;
+		while(indexof != -1) {
+			indexof = numbers.indexOf("[", indexof + 1);
+			if(indexof != -1) {
+				list.add(Character.toString(numbers.charAt(indexof + 1)));
+			}
+		}
+
+		return list;
 	}
       
     private static int sum(String[] numbers){
