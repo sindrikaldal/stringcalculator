@@ -34,7 +34,10 @@ public class Calculator {
 
 		if(givenDelimiter(numbers)) {
 			if(multipleDelimiters(numbers)) {
-				numbers = "1,2";
+				String delimiter1 = Character.toString(numbers.charAt(3));
+				String delimiter2 = Character.toString(numbers.charAt(6));
+				split = "[\n" + delimiter1 + delimiter2 + "]";
+				numbers = numbers.substring(9);
 
 			}
 			else {

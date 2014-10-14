@@ -57,7 +57,7 @@ public class CalculatorTest {
 
     @Test
     public void testInputWithMultipleDelimiters(){
-    	assertEquals(3, Calculator.add("//[*][%]\n1*2%3"));
+    	assertEquals(6, Calculator.add("//[*][%]\n1*2%3"));
     }
 
 
