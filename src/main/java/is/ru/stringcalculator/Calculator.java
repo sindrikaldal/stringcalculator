@@ -97,13 +97,34 @@ public class Calculator {
         for(String number : numbers){
         	int num = toInt(number);
         	if(num < 0) {
-        		throw new IllegalArgumentException("Negatives not allowed");
+        		String message = ExceptionMessage(numbers);
+        		throw new IllegalArgumentException(message);
         	}
         	if(num <= 1000) {
         		total += num;
         	}
 		 }		
 		return total;
+    }
+
+    private static String ExceptionMessage(String[] numbers) {
+
+    	ArrayList<String> list = new ArrayList<String>();
+
+    	for(String number : numbers) {
+    		if(toInt(number) < 0) {
+    			list.add(number);
+    		}
+    	}
+
+    	String message = "Negatives not allowed: ";
+    	for (int i = 0; i < list.size(); i++) {
+    		message += list.get(i) + ",";
+    	}
+
+    	return message;
+
+
     }
 
 
