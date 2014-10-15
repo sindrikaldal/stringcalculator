@@ -1,10 +1,12 @@
 package is.ru.stringcalculator;
 
 import static org.junit.Assert.assertEquals;
-//import org.junit.rules.ExpectedException;
+import static org.junit.Assert.fail;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.Test;
-/*import org.junit.Rule;
-import static org.hamcrest.Matchers.*;*/
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 public class CalculatorTest {
 
@@ -42,13 +44,15 @@ public class CalculatorTest {
     	assertEquals(3, Calculator.add("//;\n1;2"));
     }
 
-    /*@Rule
+    @Rule
 	public ExpectedException thrown = ExpectedException.none();
+
 	@Test
 	public void throwExceptionForNegativeNumbers() {
     	thrown.expect(IllegalArgumentException.class);
     	thrown.expectMessage("Negatives not allowed");
-	}*/
+    	Calculator.add("-1,-2,3");
+	}
 
 	@Test
     public void testToIgnoreNumbersLargerThan1000(){

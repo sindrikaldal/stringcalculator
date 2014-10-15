@@ -39,19 +39,13 @@ public class Calculator {
 				ArrayList<String> delimiters = getDelimiters(numbers);
 
 				split = "[\n";
+
 				for(int i = 0; i < delimiters.size() ; i++) {
 					split += delimiters.get(i);
 				}
 
-
-				if(anyLengthDelimiter(delimiters)) {
-					split += "]+";
-				}
-				else {
-					split += "]";
-				}
-
-
+				split += "]+";
+				
 				int index = numbers.indexOf("\n") + 1;
 
 				numbers = numbers.substring(index);
@@ -85,19 +79,15 @@ public class Calculator {
 
 		int indexof = 0;
 		int next = 0;
-		while(indexof != -1) {
-			indexof = numbers.indexOf("[", indexof + 1);
-			next = numbers.indexOf("]", indexof);
-			if(indexof != -1) {
-				if((next - indexof) > 2 ) {
-					list.add(numbers.substring(indexof + 1, next));
-				}
-				else{
-					list.add(Character.toString(numbers.charAt(indexof + 1)));
-				}				
-			}	
-		}
 
+		 	do{
+				indexof = numbers.indexOf("[", indexof + 1);
+				next = numbers.indexOf("]", indexof);
+				if(indexof != -1) {
+					list.add(numbers.substring(indexof + 1, next));
+				}			
+			}while(indexof != -1);	
+		
 		return list;
 	}
       
@@ -106,6 +96,9 @@ public class Calculator {
 
         for(String number : numbers){
         	int num = toInt(number);
+        	if(num < 0) {
+        		throw new IllegalArgumentException("Negatives not allowed");
+        	}
         	if(num <= 1000) {
         		total += num;
         	}
