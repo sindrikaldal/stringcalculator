@@ -60,6 +60,11 @@ public class CalculatorTest {
     	assertEquals(6, Calculator.add("//[*][%]\n1*2%3"));
     }
 
+    @Test
+    public void testInputWithMultipleDelimitersOfAnyLength(){
+    	assertEquals(6, Calculator.add("//[palli][%]\n1palli2%3"));
+    }
+
 
 
 }

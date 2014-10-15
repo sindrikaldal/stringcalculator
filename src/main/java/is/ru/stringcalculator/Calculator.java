@@ -37,12 +37,21 @@ public class Calculator {
 		if(givenDelimiter(numbers)) {
 			if(multipleDelimiters(numbers)) {
 				ArrayList<String> delimiters = getDelimiters(numbers);
+
 				split = "[\n";
 				for(int i = 0; i < delimiters.size() ; i++) {
 					split += delimiters.get(i);
 				}
 
-				split += "]";
+
+				if(anyLengthDelimiter(delimiters)) {
+					split += "]+";
+				}
+				else {
+					split += "]";
+				}
+
+
 				int index = numbers.indexOf("\n") + 1;
 
 				numbers = numbers.substring(index);
@@ -55,8 +64,19 @@ public class Calculator {
 
 
 		}
-		
+
 		return numbers.split(split);
+	}
+
+	private static boolean anyLengthDelimiter(ArrayList<String> list) {
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).length() > 1) {
+				return true;
+			}
+		}
+
+		return false;
+
 	}
 
 	private static ArrayList<String> getDelimiters(String numbers) {
@@ -64,11 +84,18 @@ public class Calculator {
 		ArrayList<String> list = new ArrayList<String>();
 
 		int indexof = 0;
+		int next = 0;
 		while(indexof != -1) {
 			indexof = numbers.indexOf("[", indexof + 1);
+			next = numbers.indexOf("]", indexof);
 			if(indexof != -1) {
-				list.add(Character.toString(numbers.charAt(indexof + 1)));
-			}
+				if((next - indexof) > 2 ) {
+					list.add(numbers.substring(indexof + 1, next));
+				}
+				else{
+					list.add(Character.toString(numbers.charAt(indexof + 1)));
+				}				
+			}	
 		}
 
 		return list;
