@@ -35,33 +35,21 @@ public class Calculator {
 		String split = "[,\n]";
 
 		if(givenDelimiter(numbers)) {
+			int index = numbers.indexOf("\n") + 1;
 			if(multipleDelimitersOrAnyLength(numbers)) {
-				ArrayList<String> delimiters = getDelimiters(numbers);
 
-				split = "[\n";
-
-				for(int i = 0; i < delimiters.size() ; i++) {
-					split += delimiters.get(i);
-				}
-
-				split += "]+";
-				
-				int index = numbers.indexOf("\n") + 1;
-
-				numbers = numbers.substring(index);
+				split = "[\n" + getDelimiters(numbers, split) + "]+";				
 			}
 			else {
 				String delimiter = Character.toString(numbers.charAt(2));
 				split = "[\n" + delimiter + "]";
-				numbers = numbers.substring(4);
 			}
+			numbers = numbers.substring(index);
 		}
 		return numbers.split(split);
 	}
 
-	private static ArrayList<String> getDelimiters(String numbers) {
-
-		ArrayList<String> list = new ArrayList<String>();
+	private static String getDelimiters(String numbers, String split) {
 
 		int indexof = 0, next = 0;
 
@@ -69,11 +57,11 @@ public class Calculator {
 				indexof = numbers.indexOf("[", indexof + 1);
 				next = numbers.indexOf("]", indexof);
 				if(indexof != -1) {
-					list.add(numbers.substring(indexof + 1, next));
+					split += numbers.substring(indexof + 1, next);
 				}			
 			}while(indexof != -1);	
 		
-		return list;
+		return split;
 	}
       
     private static int sum(String[] numbers){
