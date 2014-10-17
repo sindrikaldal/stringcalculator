@@ -60,14 +60,15 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testInputWithMultipleDelimiters(){
-    	assertEquals(6, Calculator.add("//[*][%]\n1*2%3"));
+    public void testDelimiterofAnyLength(){
+        assertEquals(3, Calculator.add("//[***]\n1***2"));
+    }
+     @Test
+    public void testInputWithMultipleDelimitersOfAnyLength(){
+        assertEquals(10, Calculator.add("//[***][%][$$$$]\n1***2%3$$$$4"));
     }
 
-    @Test
-    public void testInputWithMultipleDelimitersOfAnyLength(){
-    	assertEquals(6, Calculator.add("//[palli][%]\n1palli2%3"));
-    }
+    
 
 
 

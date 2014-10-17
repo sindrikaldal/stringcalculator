@@ -25,7 +25,7 @@ public class Calculator {
 		return text.startsWith("//");
 	}
 
-	private static boolean multipleDelimiters(String text) {
+	private static boolean multipleDelimitersOrAnyLength(String text) {
 
 		return text.startsWith("//[");
 	}
@@ -35,7 +35,7 @@ public class Calculator {
 		String split = "[,\n]";
 
 		if(givenDelimiter(numbers)) {
-			if(multipleDelimiters(numbers)) {
+			if(multipleDelimitersOrAnyLength(numbers)) {
 				ArrayList<String> delimiters = getDelimiters(numbers);
 
 				split = "[\n";
