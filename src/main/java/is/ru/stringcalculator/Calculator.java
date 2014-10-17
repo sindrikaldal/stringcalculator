@@ -55,30 +55,15 @@ public class Calculator {
 				split = "[\n" + delimiter + "]";
 				numbers = numbers.substring(4);
 			}
-
-
 		}
-
 		return numbers.split(split);
-	}
-
-	private static boolean anyLengthDelimiter(ArrayList<String> list) {
-		for(int i = 0; i < list.size(); i++) {
-			if(list.get(i).length() > 1) {
-				return true;
-			}
-		}
-
-		return false;
-
 	}
 
 	private static ArrayList<String> getDelimiters(String numbers) {
 
 		ArrayList<String> list = new ArrayList<String>();
 
-		int indexof = 0;
-		int next = 0;
+		int indexof = 0, next = 0;
 
 		 	do{
 				indexof = numbers.indexOf("[", indexof + 1);
@@ -109,26 +94,12 @@ public class Calculator {
 
     private static String ExceptionMessage(String[] numbers) {
 
-    	ArrayList<String> list = new ArrayList<String>();
-
-    	for(String number : numbers) {
+    	String message = "Negatives not allowed: ";
+       	for(String number : numbers) {
     		if(toInt(number) < 0) {
-    			list.add(number);
+    			message += number + ",";
     		}
     	}
-
-    	String message = "Negatives not allowed: ";
-    	for (int i = 0; i < list.size(); i++) {
-    		message += list.get(i) + ",";
-    	}
-
     	return message;
-
-
     }
-
-
-
-
-
 }
